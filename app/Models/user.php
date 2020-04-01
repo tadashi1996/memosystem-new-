@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Model
 {
+    protected $fillable = ['name','email','authority','password'];
     // $id=Auth::user();
     // $mail=;
     // $pass=
