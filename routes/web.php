@@ -25,6 +25,20 @@ Route::get('hello/del/{id}','userController@del');
 Route::post('hello/del/{id}','userController@remove');
 
 
+Route::get('/home/memo', 'memocontroller@index');
+Route::post('memo','memoController@post');
+Route::get('memo/add','memoController@add');
+Route::post('memo/add','memoController@create');
+Route::get('memo/edit/{id}','memoController@edit');
+Route::post('memo/edit/{id}','memoController@update');
+Route::get('memo/del/{id}','memoController@del');
+Route::post('memo/del/{id}','memoController@remove');
+
+
+
+
+
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

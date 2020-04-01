@@ -11,7 +11,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\HelloRequest;
 
-
 class Usercontroller extends Controller
 {
     public function index(Request $request)
@@ -28,13 +27,8 @@ class Usercontroller extends Controller
         return view('hello.index', ['items' => $items]);
     }
 
-
-
-
     public function post(Request $request)
     {
-
-
         $validate_rule = [
             'msg' => 'required',
         ];
@@ -66,9 +60,6 @@ class Usercontroller extends Controller
 
     public function edit($id)
     {
-        
-        // $items = User::select('id')->get();
-        // dd($items);
         return view('hello.edit', ['form' => User::find($id)]);
     }
 
