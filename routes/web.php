@@ -27,8 +27,11 @@ Route::post('hello/del/{id}','userController@remove');
 
 Route::get('/home/memo', 'memocontroller@index');
 Route::post('memo','memoController@post');
-Route::get('memo/add','memoController@add');
-Route::post('memo/add','memoController@create');
+Route::get('memo/add/','memoController@add');
+Route::post('memo/add/','memoController@create');
+Route::get('memo/detail/{id}','memoController@detail');
+Route::post('memo/detail/{id}','memoController@detailrepair');
+
 Route::get('memo/edit/{id}','memoController@edit');
 Route::post('memo/edit/{id}','memoController@update');
 Route::get('memo/del/{id}','memoController@del');

@@ -27,6 +27,12 @@
             <th>authority:</th>
             <td><input type="text" name="authority"></td>
         </tr>
+        <tr>
+            <th>メモ内容</th>
+            <td><input type="text" name="memodetails">
+                {{-- <textarea name="memodetails" name="memodetails"  cols=50　rows="10"></textarea> --}}
+            </td>
+        </tr>
         {{-- <tr>
             <th>password:</th>
             <td><input type="text" name="password"></td>

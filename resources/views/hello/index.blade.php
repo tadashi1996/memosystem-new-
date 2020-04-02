@@ -10,7 +10,6 @@
         <th><a href="/hello?sort=name">name</a></th>
         <th><a href="/hello?sort=mail">mail</a></th>
         <th><a href="/hello?sort=authority">authority</a></th>
-
     </tr>
     @foreach ($items as $item)
     <tr>
@@ -20,7 +19,11 @@
         <td>{{$item->authority}}</td>
         <th><a href="/hello/edit/{{$item->id}}">repair</a></th>
         <th><a href="/hello/del/{{$item->id}}">delete</a></th>
-        
+        <th><a href="/memo/add/{{$item->id}}">メモ登録</a></th>
+        <th><a href="/memo/add/{{$item->id}}">メモ一覧</a></th>
+
+
+
     </tr>
     @endforeach
 </table>

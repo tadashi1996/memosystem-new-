@@ -19,6 +19,7 @@
         <td>{{$item->discription}}</td>
         <td>{{$item->createuser}}</td>
         <td>{{$item->authority}}</td>
+        <th><a href="/memo/detail/{{$item->id}}">memoDetail</a></th>
         <th><a href="/memo/edit/{{$item->id}}">repair</a></th>
         <th><a href="/memo/del/{{$item->id}}">delete</a></th>
 

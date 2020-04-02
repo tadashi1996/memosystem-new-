@@ -22,7 +22,7 @@
             <th>createuser:</th>
             <td><input type="text" name="createuser" value="{{$form->createuser}}"></td>
         </tr>
-                <tr>
+        <tr>
             <th>discription:</th>
             <td><input type="text" name="discription" value="{{$form->discription}}"></td>
         </tr>
