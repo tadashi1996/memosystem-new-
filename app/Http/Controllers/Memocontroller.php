@@ -52,6 +52,7 @@ class Memocontroller extends Controller
                 // 'id' => $request->id,
                 'title' => $request->title,
                 'discription' => $request->discription,
+                'createuser'=>$request->createuser,
                 'authority' => $request->authority,
             ]
         );
@@ -68,9 +69,22 @@ class Memocontroller extends Controller
         $memo = Memo::find($request->id);
         $memo->title = $request->title;
         $memo->discription = $request->discription;
+        $memo->createuser = $request->createuser;
         $memo->authority = $request->authority;
-        // $memo->authority = $request->authority;
         $memo->update();
-        return redirect('home');
+        return redirect('home/memo');
+    }
+    public function del(Request $request)
+    {
+        return view('memos.del', ['form' => Memo::find($request->id)]);
+    }
+
+    public function remove(Request $request)
+    {
+        $memo = Memo::find($request->id);
+        $memo->delete();
+        return redirect('home/memo');
     }
 }
+
+

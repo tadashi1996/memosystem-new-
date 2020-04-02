@@ -35,10 +35,6 @@ Route::get('memo/del/{id}','memoController@del');
 Route::post('memo/del/{id}','memoController@remove');
 
 
-
-
-
-
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

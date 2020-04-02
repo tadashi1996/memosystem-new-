@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class memo extends Model
  {
-protected $fillable = ['name','email','authority','password'];
+protected $fillable = ['title','discription','createuser','authority'];
       
 //         $memoid=
 //         $memotitle=
