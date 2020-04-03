@@ -1,10 +1,10 @@
 {{--url= localhost/home --}}
 
-@extends('layouts.app')
+@extends('layouts.admilte')
 
 @section('content')
 
-<table>
+<table class="table table-hover">
     <tr>
         <th><a href="/memo?sort=id">id</a></th>
         <th><a href="/memo?sort=title">title</a></th>

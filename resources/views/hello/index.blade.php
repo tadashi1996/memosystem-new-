@@ -1,10 +1,9 @@
-{{--url= localhost/home --}}
-
-@extends('layouts.app')
+@extends('layouts.admilte')
 
 @section('content')
 
-<table>
+<title>Userlist @yield('title')</title>
+<table class="table table-hover">
     <tr>
         <th><a href="/hello?sort=id">id</a></th>
         <th><a href="/hello?sort=name">name</a></th>
@@ -17,17 +16,13 @@
         <td>{{$item->name}}</td>
         <td>{{$item->email}}</td>
         <td>{{$item->authority}}</td>
-        <th><a href="/hello/edit/{{$item->id}}">repair</a></th>
+        <th><a class="button" href="/hello/edit/{{$item->id}}">repair</a></th>
         <th><a href="/hello/del/{{$item->id}}">delete</a></th>
-        <th><a href="/memo/add/{{$item->id}}">メモ登録</a></th>
-        <th><a href="/memo/add/{{$item->id}}">メモ一覧</a></th>
-
-
-
     </tr>
     @endforeach
 </table>
-
+{{-- <a href="/memo/add" class=nav-link>メモ登録</a>
+<a href="/home/memo" class=nav-link>メモ一覧</a> --}}
 @endsection
 
 @section('footer')

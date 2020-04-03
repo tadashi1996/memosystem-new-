@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admilte')
 
 @section('title', 'Delete')
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use  App\Models\User;
 use  App\Models\Memo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,21 +11,34 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\HelloRequest;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\TryCatch;
 
 class Memocontroller extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     //  次コメントアウトまでif文により制御
+    //     if (isset($request->id)) {
+    //         $parm = ['id' => $request->id];
+    //         $items = DB::select('select * from memos where id = id', $parm);
+    //     } else {
+    //         $items = DB::select('select * from memos');
+    //     }
+    //     // 次行必要？
+    //     // $items = User::all();
+    //     return view('memos.index', ['items' => $items]);
+    // }
+
     public function index(Request $request)
     {
-        //  次コメントアウトまでif文により制御
-        if (isset($request->id)) {
-            $parm = ['id' => $request->id];
-            $items = DB::select('select * from memos where id = id', $parm);
-        } else {
-            $items = DB::select('select * from memos');
-        }
-        // 次行必要？
-        // $items = User::all();
-        return view('memos.index', ['items' => $items]);
+        $authority = Auth::user()->authority;
+        // // $memoauth = Memo::get(['authority']);
+        $items = Memo::where('authority', '>=', $authority);
+        // dd($items->get());
+        // dd($authority);
+
+        return view('memos.index', ['items' => $items->get()]);
     }
 
     public function post(Request $request)
@@ -47,8 +61,6 @@ class Memocontroller extends Controller
 
     public function create(Request $request)
     {
-
-
         $memo = Memo::create(
             [
                 'id' => $request->id,
@@ -79,7 +91,18 @@ class Memocontroller extends Controller
     }
     public function detail($id)
     {
-        return view('memos.detail', ['form' => Memo::find($id)]);
+        $item = Memo::find($id);
+        // DD($item);
+        if ($item === null) {
+            return redirect('/home/memo');
+        }
+        $authority = Auth::user()->authority;
+        $memoauthority = Memo::find($id)->authority;
+        if ($authority > $memoauthority) {
+            // DD($memoauthority);
+            return redirect('/home/memo');
+        }
+        return view('memos.detail', ['form' => $item]);
     }
     public function detailrepair(Request $request)
     {
