@@ -16,8 +16,8 @@
         <td>{{$item->name}}</td>
         <td>{{$item->email}}</td>
         <td>{{$item->authority}}</td>
-        <th><a class="button" href="/hello/edit/{{$item->id}}">repair</a></th>
-        <th><a href="/hello/del/{{$item->id}}">delete</a></th>
+        <th><a class="button" href="/user/edit/{{$item->id}}">repair</a></th>
+        <th><a href="/user/del/{{$item->id}}">delete</a></th>
     </tr>
     @endforeach
 </table>
