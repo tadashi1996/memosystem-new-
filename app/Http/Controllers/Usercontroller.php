@@ -13,7 +13,7 @@ use App\Http\Requests\HelloRequest;
 
 class Usercontroller extends Controller
 {
-  protected function validator(array $data)
+    protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -75,15 +75,11 @@ class Usercontroller extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->passwordconfirm);
-        // dd($request->password);
-
-        if (strcmp($request->passwordconfirm, $request->password) == 1) {
-            // dd($request->passwordconfirm);
-            return redirect()->back()->with('change_password_error', '確認用パスワードと違います');
-
-            // return redirect()->back()->with('change_password_error', '確認用パスワードと違います');
-        }
+        // validationによりパスワードの確認
+        $validateData = $request->validate([
+            'authority' => ['required', 'string',],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
         $user = User::find($request->id);
         $user->name = $request->name;
@@ -108,25 +104,3 @@ class Usercontroller extends Controller
         return redirect('home');
     }
 }
-
-function Validator(array $data)
-{
-    return Validator::make($data, [
-        'name'     => 'required|string|max:255',
-        'gender'   => 'required',
-        'age'      => 'required|integer',
-        'email'    => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:6|confirmed',
-    ]);
-}
-// 以下不明2020.04.01　10：30
-//     protected function create(array $data)
-//     {
-//         return User::create([
-//             'name'     => $data['name'],
-//             'gender'   => $data['gender'],
-//             'age'      => $data['age'],
-//             'email'    => $data['email'],
-//             'password' => Hash::make($data['password']),
-//         ]);
-//     }

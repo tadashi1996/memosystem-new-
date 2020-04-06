@@ -26,9 +26,16 @@
     <label for="password">Password</label>
     <input type="password" class="form-control" name="password" placeholder="Passwordを入力">
     <label for="password">Password confirm</label>
-    <input type="password" class="form-control" name="passwordconfirm" placeholder="確認Passwordを入力">
-
-
+    <input type="password" class="form-control" name="password_confirmation" placeholder="確認Passwordを入力">
+  @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
