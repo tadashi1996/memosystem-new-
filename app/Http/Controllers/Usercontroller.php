@@ -40,23 +40,23 @@ class Usercontroller extends Controller
         return  $response;
     }
 
-    public function add(Request $request)
-    {
-        return view('hello.add');
-    }
+    // public function add(Request $request)
+    // {
+    //     return view('hello.add');
+    // }
 
-    public function create(Request $request)
-    {
-        $user = User::create(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'authority' => $request->authority,
-                'password' => $request->password,
-            ]
-        );
-        return redirect('/home');
-    }
+    // public function create(Request $request)
+    // {
+    //     $user = User::create(
+    //         [
+    //             'name' => $request->name,
+    //             'email' => $request->email,
+    //             'authority' => $request->authority,
+    //             'password' => $request->password,
+    //         ]
+    //     );
+    //     return redirect('/home');
+    // }
 
     public function edit($id)
     {
