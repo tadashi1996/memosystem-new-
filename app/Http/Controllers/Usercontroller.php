@@ -13,13 +13,14 @@ use App\Http\Requests\HelloRequest;
 
 class Usercontroller extends Controller
 {
-    protected function validator(array $data)
+  protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'authority' => ['required', 'string',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'passwordconfirm' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
     public function index(Request $request)
@@ -74,13 +75,23 @@ class Usercontroller extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->passwordconfirm);
+        // dd($request->password);
+
+        if (strcmp($request->passwordconfirm, $request->password) == 1) {
+            // dd($request->passwordconfirm);
+            return redirect()->back()->with('change_password_error', '確認用パスワードと違います');
+
+            // return redirect()->back()->with('change_password_error', '確認用パスワードと違います');
+        }
+
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->authority = $request->authority;
         // $user->password = $request->password;
-        $user->password = Hash::make($request['authority']);
-        // 'password' => Hash::make($data['password']),
+        $user->password = Hash::make($request['password']);
+        // dd($request->passwordconfirm);
         $user->update();
         return redirect('home');
     }

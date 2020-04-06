@@ -24,7 +24,11 @@
     <input type="text" class="form-control" name="authority" value="{{$form->authority}}">
 
     <label for="password">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Passwordを入力" >
+    <input type="password" class="form-control" name="password" placeholder="Passwordを入力">
+    <label for="password">Password confirm</label>
+    <input type="password" class="form-control" name="passwordconfirm" placeholder="確認Passwordを入力">
+
+
 
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
