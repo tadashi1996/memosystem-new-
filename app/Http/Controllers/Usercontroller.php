@@ -13,6 +13,15 @@ use App\Http\Requests\HelloRequest;
 
 class Usercontroller extends Controller
 {
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'authority' => ['required', 'string',],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
     public function index(Request $request)
     {
         //  次コメントアウトまでif文により制御
@@ -68,8 +77,10 @@ class Usercontroller extends Controller
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
         $user->authority = $request->authority;
+        // $user->password = $request->password;
+        $user->password = Hash::make($request['authority']);
+        // 'password' => Hash::make($data['password']),
         $user->update();
         return redirect('home');
     }
