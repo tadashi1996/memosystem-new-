@@ -19,31 +19,34 @@
     <label for="email">Mail</label>
     <input type="text" class="form-control" name="email" value="{{$form->email}}">
 
+    @if(Auth::user()->authority == 1 )
     <label for="authority">Authority</label>
-    <input type="text" class="form-control" name="authority" value="{{$form->authority}}">
+    <select name='authority' class="form-control">>
+        <option value="{{$form->authority}}">今のauthorityは{{$form->authority}}です。変更する場合は選択してください。</option>
+        @foreach(config('authority') as $index => $authority)
+        <option value="{{ $index }}">{{ $authority }}</option>
+        @endforeach
+    </select>
+    @endif
 
     <label for="password">Password</label>
     <input type="password" class="form-control" name="password" placeholder="Passwordを入力">
     <label for="password">Password confirm</label>
     <input type="password" class="form-control" name="password_confirmation" placeholder="確認Passwordを入力">
     {{-- 以下if文validatorの確認機能によるエラーメッセージ --}}
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
     </div>
-
 </form>
-
-
-
-@endif
 @endsection
 
 @section('footer')

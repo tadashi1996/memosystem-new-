@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\HelloRequest;
+use App\Http\Requests\Memorequest;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -61,14 +61,13 @@ class Memocontroller extends Controller
         return view('memos.add');
     }
 
-    public function create(Request $request)
+    public function create(Memorequest $request)
     {
         $memo = Memo::create(
             [
-                'id' => $request->id,
                 'title' => $request->title,
                 'discription' => $request->discription,
-                'createuser' => $request->createuser,
+                'createuser' => Auth::user()->name,
                 'authority' => $request->authority,
                 'memodetails' => $request->memodetails,
             ]

@@ -25,30 +25,21 @@
     <input type="text" class="form-control" name="createuser" value="{{$form->createuser}}">
 
     <label for="authority">Authority</label>
-    <input type="text" class="form-control" name="authority" value="{{$form->authority}}">
-    {{-- <label for="memodetails">memodetails</label>
-        <textarea name="memodetails" cols=50　rows="10" class="form-control" placeholder="メモの内容を入力"></textarea> --}}
-    {{-- <tr>
-                <th>title:</th>
-                <td><input type="text" name="title" value="{{$form->title}}"></td>
-    </tr>
-    <tr>
-        <th>createuser:</th>
-        <td><input type="text" name="createuser" value="{{$form->createuser}}"></td>
-    </tr>
-    <tr>
-        <th>discription:</th>
-        <td><input type="text" name="discription" value="{{$form->discription}}"></td>
-    </tr>
-    <tr>
-        <th>authority:</th>
-        <td><input type="text" name="authority" value="{{$form->authority}}"></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td><input type="submit" value="send"></td>
-    </tr> --}}
-
+    <select name='authority' class="form-control {{ $errors->has('authority') ? 'is-invalid' : '' }}">
+        <option value="{{$form->authority}}">今のauthorityは{{$form->authority}}です。変更する場合は選択してください。</option>
+        @foreach(config('memoauthority') as $index => $authority)
+        <option value="{{ $index }}">{{ $authority }}</option>
+        @endforeach
+    </select>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
     </div>

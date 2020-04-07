@@ -23,16 +23,24 @@
     <label for="discription">discription</label>
     <input type="text" class="form-control" name="discription" placeholder="Discription">
 
-    <label for="createuser">createuser</label>
-    <input type="text" class="form-control" name="createuser" placeholder="Createuser">
-
     <label for="authority">authority</label>
-    <input type="text" class="form-control" name="authority" placeholder="Authority">
-
+    <select name='authority' class="form-control {{ $errors->has('authority') ? 'is-invalid' : '' }}">
+        <option value="">Authority(選択してください)</option>
+        @foreach(config('memoauthority') as $index => $authority)
+        <option value="{{ $index }}">{{ $authority }}</option>
+        @endforeach
+    </select>
     <label for="memodetails">memodetails</label>
     <textarea name="memodetails" cols=50　rows="10" class="form-control" placeholder="メモの内容を入力"></textarea>
-    {{-- <td><input type="text"class="form-control" name="memodetails" placeholder="メモの内容を入力"></td> --}}
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
     </div>

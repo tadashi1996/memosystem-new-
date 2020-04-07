@@ -17,17 +17,18 @@
         <td>{{$item->name}}</td>
         <td>{{$item->email}}</td>
         <td>{{$item->authority}}</td>
-        @if($item->id == Auth::user()->id )
+        @if(Auth::user()->authority==1)
         <th><a class="button" href="/user/edit/{{$item->id}}">repair</a></th>
-        @endif
-        @if($item->id !== Auth::user()->id )
-        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        @endif
         <th><a href="/user/del/{{$item->id}}">delete</a></th>
+        @elseif($item->id == Auth::user()->id )
+        <th><a class="button" href="/user/edit/{{$item->id}}">repair</a></th>
+        <th><a href="/user/del/{{$item->id}}">delete</a></th>
+        @endif
+
+
     </tr>
     @endforeach
 </table>
-@else ()ログインされていません！
 @endif
 
 @endsection

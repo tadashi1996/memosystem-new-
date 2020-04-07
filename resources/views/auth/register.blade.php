@@ -61,10 +61,15 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" name="authority" class="form-control {{ $errors->has('authority') ? 'is-invalid' : '' }}" value="{{ old('authority') }}" placeholder="Authority">
+                    <select name='authority' class="form-control {{ $errors->has('authority') ? 'is-invalid' : '' }}">
+                        <option value="">Authority(選択してください)</option>
+                        @foreach(config('authority') as $index => $authority)
+                        <option value="{{ $index }}">{{ $authority }}</option>
+                        @endforeach
+                    </select>
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-lock"></span>
                         </div>
                     </div>
                     @if ($errors->has('authority'))

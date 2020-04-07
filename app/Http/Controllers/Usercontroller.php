@@ -13,16 +13,16 @@ use App\Http\Requests\HelloRequest;
 
 class Usercontroller extends Controller
 {
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'authority' => ['required', 'string',],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'passwordconfirm' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    // public function validator(Request $request)
+    // {
+    //     return Validator::make($request, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'authority' => ['required', 'string',],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //         'passwordconfirm' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+    // }
 
     // 31行目までログインしているかどうか確認　もしログインしていない場合ログイン画面に
     public function __construct()
@@ -80,19 +80,19 @@ class Usercontroller extends Controller
         return view('hello.edit', ['form' => User::find($id)]);
     }
 
-    public function update(Request $request)
+    public function update(HelloRequest $request)
     {
-        // validationによりパスワードの確認,エラーメッセージの表示はview内にて行っている
-        $validateData = $request->validate([
-            'authority' => ['required', 'string',],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        // // validationによりパスワードの確認,エラーメッセージの表示はview内にて行っている
+        // $validateData = $request->validate([
+        //     'authority' => ['required', 'string',],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ]);
+        // dd($request);
 
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->authority = $request->authority;
-        // $user->password = $request->password;
         $user->password = Hash::make($request['password']);
         $user->update();
         return redirect('home');
