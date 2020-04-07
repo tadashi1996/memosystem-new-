@@ -30,14 +30,16 @@ class Memocontroller extends Controller
     //     return view('memos.index', ['items' => $items]);
     // }
 
+    // 37行目までログインしているかどうか確認　もしログインしていない場合ログイン画面に
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $authority = Auth::user()->authority;
-        // // $memoauth = Memo::get(['authority']);
         $items = Memo::where('authority', '>=', $authority);
-        // dd($items->get());
-        // dd($authority);
-
         return view('memos.index', ['items' => $items->get()]);
     }
 

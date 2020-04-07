@@ -8,9 +8,8 @@
 @endsection
 
 @section('content')
+
 <form action="edit" method="post">
-
-
     {{csrf_field()}}
     <input type="hidden" name="id" value="{{$form->id}}">
 
@@ -27,41 +26,24 @@
     <input type="password" class="form-control" name="password" placeholder="Passwordを入力">
     <label for="password">Password confirm</label>
     <input type="password" class="form-control" name="password_confirmation" placeholder="確認Passwordを入力">
-  @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+    {{-- 以下if文validatorの確認機能によるエラーメッセージ --}}
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
     <div class="card-footer">
         <input type="submit" class="btn btn-primary" value="send">
     </div>
-    {{-- <tr>
-            <th>name:</th>
-            <td><input type="text" name="name" value="{{$form->name}}"></td>
-    </tr>
-    <tr>
-        <th>mail:</th>
-        <td><input type="text" name="email" value="{{$form->email}}"></td>
-    </tr>
-    <tr>
-        <th>authority:</th>
-        <td><input type="text" name="authority" value="{{$form->authority}}"></td>
-    </tr>
-    <tr>
-        <th>password:</th>
-        <td><input type="text" name="password" value="{{$form->password}}"></td>
-    </tr>
-    <tr>
-        <th></th>
-        <td><input type="submit" value="send"></td>
-    </tr> --}}
+
 </form>
 
+
+
+@endif
 @endsection
 
 @section('footer')

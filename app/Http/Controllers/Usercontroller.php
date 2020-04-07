@@ -23,6 +23,13 @@ class Usercontroller extends Controller
             'passwordconfirm' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
+
+    // 31行目までログインしているかどうか確認　もしログインしていない場合ログイン画面に
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         //  次コメントアウトまでif文により制御
@@ -31,9 +38,9 @@ class Usercontroller extends Controller
             $items = DB::select('select * from users where id = id', $parm);
         } else {
             $items = DB::select('select * from users');
+            // 次行同じ意味
+            // $items = User::all();
         }
-        // 次行必要？
-        // $items = User::all();
         return view('hello.index', ['items' => $items]);
     }
 
@@ -75,7 +82,7 @@ class Usercontroller extends Controller
 
     public function update(Request $request)
     {
-        // validationによりパスワードの確認
+        // validationによりパスワードの確認,エラーメッセージの表示はview内にて行っている
         $validateData = $request->validate([
             'authority' => ['required', 'string',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -87,7 +94,6 @@ class Usercontroller extends Controller
         $user->authority = $request->authority;
         // $user->password = $request->password;
         $user->password = Hash::make($request['password']);
-        // dd($request->passwordconfirm);
         $user->update();
         return redirect('home');
     }

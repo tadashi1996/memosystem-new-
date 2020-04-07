@@ -3,6 +3,7 @@
 @section('content')
 
 <title>Userlist @yield('title')</title>
+@if(Auth::check())
 <table class="table table-hover">
     <tr>
         <th><a href="/hello?sort=id">id</a></th>
@@ -16,13 +17,19 @@
         <td>{{$item->name}}</td>
         <td>{{$item->email}}</td>
         <td>{{$item->authority}}</td>
+        @if($item->id == Auth::user()->id )
         <th><a class="button" href="/user/edit/{{$item->id}}">repair</a></th>
+        @endif
+        @if($item->id !== Auth::user()->id )
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        @endif
         <th><a href="/user/del/{{$item->id}}">delete</a></th>
     </tr>
     @endforeach
 </table>
-{{-- <a href="/memo/add" class=nav-link>メモ登録</a>
-<a href="/home/memo" class=nav-link>メモ一覧</a> --}}
+@else ()ログインされていません！
+@endif
+
 @endsection
 
 @section('footer')
