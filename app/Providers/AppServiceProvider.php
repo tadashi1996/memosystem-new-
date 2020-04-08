@@ -23,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        {
+            $this->loadViewsFrom(__DIR__.'/path/to/views', 'courier');
+
+            $this->publishes([
+                __DIR__.'/path/to/views' => base_path('resources/views/vendor/courier'),
+            ]);
+        }
     }
 }
