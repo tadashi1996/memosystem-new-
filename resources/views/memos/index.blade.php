@@ -1,10 +1,11 @@
 {{--url= localhost/home --}}
+{{-- index1との違いを見比べる必要あり --}}
 
 @extends('layouts.admilte')
 
 @section('content')
 <div class="card-body">
-    <table id="example1" class="table table-bordered table-hover">
+    <table id="myTable" class="table table-bordered table-hover">
         <tr>
             <th>Id</a></th>
             <th>Title</a></th>
@@ -45,9 +46,10 @@
     </div>
 </body>
 @endsection
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
- <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
- <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
 

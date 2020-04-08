@@ -82,13 +82,7 @@ class Usercontroller extends Controller
 
     public function update(HelloRequest $request)
     {
-        // // validationによりパスワードの確認,エラーメッセージの表示はview内にて行っている
-        // $validateData = $request->validate([
-        //     'authority' => ['required', 'string',],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ]);
-        // dd($request);
-
+        //引数内にHellorequestを定義することによりvalidationを行っている。エラーの表示はview内にて行っている
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;

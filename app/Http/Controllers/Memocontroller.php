@@ -40,7 +40,7 @@ class Memocontroller extends Controller
     {
         $authority = Auth::user()->authority;
         $items = Memo::where('authority', '>=', $authority);
-        return view('memos.index', ['items' => $items->get()]);
+        return view('memos.index1', ['items' => $items->get()]);
     }
 
     public function post(Request $request)
